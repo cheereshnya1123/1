@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+    <title>Валентинка для Даши</title>
+    <style>
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgb(255, 208, 224);
+            overflow: hidden;
+            font-family: 'DR Galushki Hole', cursive; /* Используем шрифт DR Galushki Hole */
+        }
+    
+        @keyframes fly {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1);
+                opacity: 0;
+            }
+        }
+    
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: red;
+            transform: rotate(45deg);
+            animation: fly 3s linear infinite;
+        }
+    
+        .heart:before, .heart:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: red;
+            border-radius: 50%;
+            top: -15px;
+            left: 0;
+        }
+    
+        .heart:after {
+            left: -15px;
+            top: 0;
+        }
+    
+        .buttons {
+            position: fixed; /* Закрепляем кнопки */
+            display: flex;
+            gap: 20px;
+            top: 83%; /* Центрируем по вертикали */
+            left: 49.5%; /* Центрируем по горизонтали */
+            transform: translate(-50%, -50%); /* Точное центрирование */
+            z-index: 100;
+        }
+    
+        .button {
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+    
+        .button.green {
+            background-color: green;
+        }
+    
+        .button.green:active {
+            transform: scale(0.9);
+        }
+    
+        .button.red {
+            background-color: rgb(255, 0, 0);
+            transition: all 0.3s ease;
+        }
+    
+        .button.red:active {
+            transform: scale(0.9);
+        }
+    
+        .image-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            filter: drop-shadow(0 0 20px rgb(255, 71, 98));
+        }
+    
+        .image {
+            width: 400px;
+            height: 400px;
+            border-radius: 10px;
+        }
+
+        .text {
+            font-family: "Lobster", serif;
+            font-weight: 400;
+            font-style: normal;
+            position: absolute;
+            text-align: center;
+            color: rgb(255, 0, 0);
+            font-size: 32px;
+            top: calc(50% + 210px);
+            opacity: 1; /* Убедимся, что текст виден сразу */
+            transition: opacity 0.1s ease; /* Плавное появление */
+        }
+
+        .photos {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 40px; /* Увеличиваем отступы между фотографиями */
+            z-index: 50;
+        }
+
+        .photo {
+            width: 300px; /* Увеличиваем ширину фотографий */
+            height: 300px; /* Увеличиваем высоту фотографий */
+            border-radius: 10px;
+            object-fit: cover;
+            filter: drop-shadow(0 0 15px rgba(255, 63, 95, 0.7));
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .photo:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 25px rgb(255, 0, 0));
+        }
+
+        .top-photos, .bottom-photos {
+            display: flex;
+            justify-content: center;
+            gap: 100px; /* Увеличиваем отступы между фотографиями */
+            width: 100%;
+        }
+
+        .top-photos {
+            position: absolute;
+            top: 4%;
+        }
+
+        .bottom-photos {
+            position: absolute;
+            bottom: 4%;
+        }
+    
+        /* Добавление случайных сердец */
+        .heart:nth-child(1) {
+            left: 10%;
+            animation-duration: 2s;
+            z-index: -1000;
+        }
+    
+        .heart:nth-child(2) {
+            left: 20%;
+            animation-duration: 3s;
+            z-index: -1000;
+        }
+    
+        .heart:nth-child(3) {
+            left: 30%;
+            animation-duration: 2.5s;
+            z-index: -1000;
+        }
+    
+        .heart:nth-child(4) {
+            left: 40%;
+            animation-duration: 3.5s;
+            z-index: -1000;
+        }
+    
+        .heart:nth-child(5) {
+            left: 50%;
+            animation-duration: 2.8s;
+            z-index: -1000;
+        }
+    
+        .heart:nth-child(6) {
+            left: 60%;
+            animation-duration: 3.2s;
+            z-index: -1000;
+        }
+    
+        .heart:nth-child(7) {
+            left: 70%;
+            animation-duration: 2.3s;
+            z-index: -1000;
+        }
+    
+        .heart:nth-child(8) {
+            left: 80%;
+            animation-duration: 3.1s;
+            z-index: -1000;
+        }
+    
+        .heart:nth-child(9) {
+            left: 90%;
+            animation-duration: 2.9s;
+            z-index: -1000;
+        }
+
+        .timerday {
+            font-family: "Dela Gothic One", serif;
+            font-weight: 400;
+            font-style: normal;
+            position: absolute;
+            text-align: center;
+            color: rgb(174, 103, 255);
+            font-size: 40px;
+            top: 50%;
+            left: 29.5%;
+            opacity: 1; /* Убедимся, что текст виден сразу */
+            transition: opacity 0.1s ease; /* Плавное появление */
+        }
+
+        .timerhrs {
+            font-family: "Dela Gothic One", serif;
+            font-weight: 400;
+            font-style: normal;
+            position: absolute;
+            text-align: center;
+            color: rgb(174, 103, 255);
+            font-size: 40px;
+            top: 50%;
+            left: 42.5%;
+            opacity: 1; /* Убедимся, что текст виден сразу */
+            transition: opacity 0.1s ease; /* Плавное появление */
+        }
+
+        .timermins {
+            font-family: "Dela Gothic One", serif;
+            font-weight: 400;
+            font-style: normal;
+            position: absolute;
+            text-align: center;
+            color: rgb(174, 103, 255);
+            font-size: 40px;
+            top: 50%;
+            left: 55%;
+            opacity: 1; /* Убедимся, что текст виден сразу */
+            transition: opacity 0.1s ease; /* Плавное появление */
+        }
+
+        .timersecs {
+            font-family: "Dela Gothic One", serif;
+            font-weight: 400;
+            font-style: normal;
+            position: absolute;
+            text-align: center;
+            color: rgb(174, 103, 255);
+            font-size: 40px;
+            top: 50%;
+            left: 67%;
+            opacity: 1; /* Убедимся, что текст виден сразу */
+            transition: opacity 0.1s ease; /* Плавное появление */
+        }
+
+        #timer {
+            font-family: "Cherry Bomb One", serif;
+            font-weight: 400;
+            font-style: normal;
+            position: absolute;
+            top: 36%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 6.6em;
+            color: rgb(200, 152, 255);
+            z-index: 1000; /* Убедимся, что таймер выше других элементов */
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+    </div>
+
+    <div class="text">Будешь моей любимкой?</div>
+
+    <div class="image-container">
+        <img src="https://cdn.discordapp.com/attachments/1192674928172998709/1340013758839521351/11.jpg?ex=67b0d090&is=67af7f10&hm=57d34e1504c2712a0c931ea1d6e17e9f2545b873fca6772d512e90a70cbe2f25&" alt="Love Image" class="image">
+    </div>
+
+    <div class="buttons">
+        <button class="button green" onclick="photos()">ДА</button>
+        <button class="button red" onclick="moveButton()">НЕТ</button>
+    </div>
+
+    <script>
+        // Функция для перемещения красной кнопки
+        function moveButton() {
+            const redButton = document.querySelector('.button.red');
+            const x = Math.random() * (window.innerWidth - redButton.offsetWidth);
+            const y = Math.random() * (window.innerHeight - redButton.offsetHeight);
+            redButton.style.position = 'absolute';
+            redButton.style.left = `${x}px`;
+            redButton.style.top = `${y}px`;
+        }
+
+        // Функция для отображения фотографий
+        function photos() {
+            // Очищаем страницу
+            document.body.innerHTML = '';
+
+            // Создаем контейнер для фотографий
+            const photosContainer = document.createElement('div');
+            photosContainer.className = 'photos';
+
+            // Добавляем 6 фотографий (3 сверху, 3 снизу)
+            photosContainer.innerHTML = `
+                <div class="top-photos">
+                    <img src="https://cdn.discordapp.com/attachments/1192674928172998709/1340048234177105920/photo_2025-02-14_20-51-42.jpg?ex=67b0f0ab&is=67af9f2b&hm=8b6741873ddf8431f033f3ce1b17b376983d111f43f98d4e0959019ae0f185cb&" alt="Photo 1" class="photo">
+                    <img src="https://cdn.discordapp.com/attachments/1192674928172998709/1340048235686789150/photo_2025-02-14_20-51-48.jpg?ex=67b0f0ac&is=67af9f2c&hm=a4d9c1acfa4696a7b252d9852baf3da954745bb1ce0136ad2180b9e98f051e80&" alt="Photo 2" class="photo">
+                    <img src="https://cdn.discordapp.com/attachments/1192674928172998709/1340048236257349703/photo_2025-02-14_20-51-50.jpg?ex=67b0f0ac&is=67af9f2c&hm=9bf87d20d69af05892f4ee630c2525318d199733782d6b561aeb937f5b96e003&" alt="Photo 3" class="photo">
+                </div>
+
+                <div id="timer">00:00:00:00</div>
+                <div class="timerday">Дни</div>
+                <div class="timerhrs">Часы</div>
+                <div class="timermins">Мин</div>
+                <div class="timersecs">Сек</div>
+                
+                <div class="bottom-photos">
+                    <img src="https://cdn.discordapp.com/attachments/1192674928172998709/1340048234646736917/photo_2025-02-14_20-51-44.jpg?ex=67b0f0ac&is=67af9f2c&hm=ce3a22877de9e79d624df216115dc8c13bab9a5b621af9c421f33d63ed77869f&" alt="Photo 4" class="photo">
+                    <img src="https://cdn.discordapp.com/attachments/1192674928172998709/1340048236572049408/photo_2025-02-14_20-51-52.jpg?ex=67b0f0ac&is=67af9f2c&hm=aa8e882dfdd6ce43728f160e9ba550ff894db1e54c3dd2a8358c49f7b5ea377c&" alt="Photo 5" class="photo">
+                    <img src="https://cdn.discordapp.com/attachments/1192674928172998709/1340048236874043474/photo_2025-02-14_20-51-57.jpg?ex=67b0f0ac&is=67af9f2c&hm=338f836f3ac292e37172a7123e2ea817eaf6b438b3647e065600f7724e39c45e&" alt="Photo 6" class="photo">
+                </div>
+
+                <div class="hearts">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+                 </div>
+            `;
+
+            // Добавляем фотографии на страницу
+            document.body.appendChild(photosContainer);
+        }
+
+        // Таймер
+        const targetDate = new Date('2024-04-11T00:00:00');
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - targetDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('timer').textContent = 
+                `${String(days).padStart(2, '0')} : ${String(hours).padStart(2, '0')} : ${String(minutes).padStart(2, '0')} : ${String(seconds).padStart(2, '0')}`;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
